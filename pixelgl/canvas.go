@@ -186,6 +186,9 @@ func setBlendFunc(cmp pixel.ComposeMethod) {
 		glhf.BlendFunc(glhf.One, glhf.One)
 	case pixel.ComposeCopy:
 		glhf.BlendFunc(glhf.One, glhf.Zero)
+	case pixel.ComposeMultiply:
+		glhf.BlendFunc(glhf.BlendFactor(0x0306), glhf.OneMinusSrcAlpha)// 0x0306 = DST_COLOR
+
 	default:
 		panic(errors.New("Canvas: invalid compose method"))
 	}
